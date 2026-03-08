@@ -66,6 +66,26 @@
       border-color: var(--focus);
       box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
     }
+    .name-hint {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      display: block;
+    }
+    .name-row {
+      display: flex;
+      gap: 12px;
+    }
+    .name-row .input-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .name-row .input-wrap label {
+      font-size: 13px;
+      color: var(--muted);
+    }
     .radio-group, .checkbox-group {
       display: flex;
       flex-direction: column;
@@ -161,6 +181,9 @@
         flex: 1 1 calc(50% - 10px);
         min-width: 0;
       }
+      .name-row {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
@@ -171,9 +194,19 @@
     <form id="surveyForm">
       <!-- Q1 -->
       <div class="question">
-        <label class="question-label">P1. Jak się nazywasz? (Tak samo jak przy składaniu zamówienia)</label>
-        <input type="text" class="text-input" name="name" required>
-        <div class="error-message" id="nameError">Proszę podać swoje imię</div>
+        <label class="question-label">P1. Jak się nazywasz?</label>
+        <span class="name-hint">Podaj imię i nazwisko takie samo jak przy składaniu zamówienia.</span>
+        <div class="name-row">
+          <div class="input-wrap">
+            <label for="firstName">Imię</label>
+            <input type="text" class="text-input" id="firstName" name="firstName" placeholder="Imię" required>
+          </div>
+          <div class="input-wrap">
+            <label for="lastName">Nazwisko</label>
+            <input type="text" class="text-input" id="lastName" name="lastName" placeholder="Nazwisko" required>
+          </div>
+        </div>
+        <div class="error-message" id="nameError">Proszę podać imię i nazwisko</div>
       </div>
       <!-- Q2 -->
       <div class="question">
@@ -295,13 +328,14 @@
 
         // Validation
         let isValid = true;
-        const name = form.querySelector('input[name="name"]').value.trim();
+        const firstName = form.querySelector('input[name="firstName"]').value.trim();
+        const lastName = form.querySelector('input[name="lastName"]').value.trim();
         const ease = form.querySelector('input[name="ease"]:checked');
         const decision = form.querySelector('input[name="decision"]:checked');
         const improve = form.querySelector('input[name="improve"]:checked');
         const stars = starsInput.value;
 
-        if (!name) {
+        if (!firstName || !lastName) {
           document.getElementById('nameError').style.display = 'block';
           isValid = false;
         } else {
@@ -339,6 +373,7 @@
         submitBtn.textContent = 'Wysyłanie...';
 
         // Collect data
+        const fullName = firstName + ' ' + lastName;
         const easeValue = ease.value;
         const decisionValue = decision.value;
         const improveValue = improve.value;
@@ -357,9 +392,9 @@
             title: '📋 New Survey Response - Dekorzaly',
             color: 3066993,
             fields: [
-              { name: 'Q1. Name', value: name, inline: false },
+              { name: 'Q1. Name', value: fullName, inline: false },
               { name: 'Q2. Order Ease', value: easeValue, inline: true },
-              { name: 'Q5. Rating', value: '⭐'.repeat(starRating) + `(${starRating} stars)`, inline: true },
+              { name: 'Q5. Rating', value: '⭐'.repeat(starRating) + ` (${starRating} stars)`, inline: true },
               { name: 'Q3. Decision Factor', value: decisionValue, inline: false },
               { name: 'Q4. Improvement', value: improveValue, inline: false }
             ],
