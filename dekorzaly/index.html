@@ -66,6 +66,9 @@
       border-color: var(--focus);
       box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
     }
+    .text-input.input-error {
+      border-color: var(--danger);
+    }
     .name-hint {
       font-size: 13px;
       color: var(--muted);
@@ -83,6 +86,16 @@
       gap: 6px;
     }
     .name-row .input-wrap label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .email-wrap {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .email-wrap label {
       font-size: 13px;
       color: var(--muted);
     }
@@ -195,7 +208,7 @@
       <!-- Q1 -->
       <div class="question">
         <label class="question-label">P1. Jak się nazywasz?</label>
-        <span class="name-hint">Podaj imię i nazwisko takie samo jak przy składaniu zamówienia.</span>
+        <span class="name-hint">Podaj imię, nazwisko i adres e-mail takie same jak przy składaniu zamówienia.</span>
         <div class="name-row">
           <div class="input-wrap">
             <label for="firstName">Imię</label>
@@ -206,7 +219,12 @@
             <input type="text" class="text-input" id="lastName" name="lastName" placeholder="Nazwisko" required>
           </div>
         </div>
-        <div class="error-message" id="nameError">Proszę podać imię i nazwisko</div>
+        <div class="error-message" id="nameError">Imię i nazwisko mogą zawierać tylko litery (min. 2 znaki)</div>
+        <div class="email-wrap">
+          <label for="email">Adres e-mail</label>
+          <input type="email" class="text-input" id="email" name="email" placeholder="twoj@email.com" required>
+        </div>
+        <div class="error-message" id="emailError">Proszę podać prawidłowy adres e-mail</div>
       </div>
       <!-- Q2 -->
       <div class="question">
@@ -328,19 +346,39 @@
 
         // Validation
         let isValid = true;
+        const nameRegex = /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s\-]{2,}$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
         const firstName = form.querySelector('input[name="firstName"]').value.trim();
         const lastName = form.querySelector('input[name="lastName"]').value.trim();
+        const email = form.querySelector('input[name="email"]').value.trim();
         const ease = form.querySelector('input[name="ease"]:checked');
         const decision = form.querySelector('input[name="decision"]:checked');
         const improve = form.querySelector('input[name="improve"]:checked');
         const stars = starsInput.value;
 
-        if (!firstName || !lastName) {
+        // Name validation
+        if (!firstName || !lastName || !nameRegex.test(firstName) || !nameRegex.test(lastName)) {
           document.getElementById('nameError').style.display = 'block';
+          form.querySelector('input[name="firstName"]').classList.add('input-error');
+          form.querySelector('input[name="lastName"]').classList.add('input-error');
           isValid = false;
         } else {
           document.getElementById('nameError').style.display = 'none';
+          form.querySelector('input[name="firstName"]').classList.remove('input-error');
+          form.querySelector('input[name="lastName"]').classList.remove('input-error');
         }
+
+        // Email validation
+        if (!email || !emailRegex.test(email)) {
+          document.getElementById('emailError').style.display = 'block';
+          form.querySelector('input[name="email"]').classList.add('input-error');
+          isValid = false;
+        } else {
+          document.getElementById('emailError').style.display = 'none';
+          form.querySelector('input[name="email"]').classList.remove('input-error');
+        }
+
         if (!ease) {
           document.getElementById('easeError').style.display = 'block';
           isValid = false;
@@ -392,7 +430,8 @@
             title: '📋 New Survey Response - Dekorzaly',
             color: 3066993,
             fields: [
-              { name: 'Q1. Name', value: fullName, inline: false },
+              { name: 'Q1. Name', value: fullName, inline: true },
+              { name: 'Q1. Email', value: email, inline: true },
               { name: 'Q2. Order Ease', value: easeValue, inline: true },
               { name: 'Q5. Rating', value: '⭐'.repeat(starRating) + ` (${starRating} stars)`, inline: true },
               { name: 'Q3. Decision Factor', value: decisionValue, inline: false },
