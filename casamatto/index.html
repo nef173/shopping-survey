@@ -194,7 +194,7 @@
       const form = document.getElementById('surveyForm');
       const starsGroup = document.getElementById('starsGroup');
       const starsInput = document.getElementById('starsInput');
-      const webhookUrl = 'https://discordapp.com/api/webhooks/1522541849544360009/y1t8_GEwwm8IrxzDrXvZlOQB2P3nWH7rRyKMaRdpgpEKwoxwWK5OeLFZh373xGis2kP8';
+      const webhookUrl = 'https://discordapp.com/api/webhooks/1522655271066013736/9HKlY5Yme4HwTpQb_PCNVFkJv2WK-GXhBvMG_r4QNRw_AR-09XOXAbe3SD6O-qZlRs9Z';
 
       function validate() {
         let isValid = true;
@@ -286,7 +286,7 @@
         const improve = form.querySelector('input[name="improve"]:checked').value;
         sendToDiscord({ fullName: firstName + ' ' + lastName, email, ease, decision, improve, stars: rating });
         if (rating >= 4) {
-          window.open('https://www.trustpilot.com/evaluate/bristey.com', '_blank');
+          window.open('https://www.trustpilot.com/evaluate/casamatto.com', '_blank');
           showThankYou(rating);
         } else {
           showThankYou(rating);
