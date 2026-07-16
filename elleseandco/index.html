@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Casa Matto Survey</title>
+  <title>Ellese &amp; Co Survey</title>
   <style>
     :root{
       --bg:#f3f4f6;
@@ -194,7 +194,7 @@
       const form = document.getElementById('surveyForm');
       const starsGroup = document.getElementById('starsGroup');
       const starsInput = document.getElementById('starsInput');
-      const webhookUrl = 'https://discordapp.com/api/webhooks/1522658271356518487/DyHN8mMQVavdTE71blNNeImiV8ERrTZehjBPWIYzdT_l8DuQ4zSo0KeM94NZ0XOjBjJF';
+      const webhookUrl = 'https://discordapp.com/api/webhooks/1527213970740609054/-mqEYpa5IZZiHEg3vxYcWAUOP8slsC0Yi-L47Wh273FQxt-KMwm4B6ahjCRXVYEh7ghe';
 
       function validate() {
         let isValid = true;
@@ -237,7 +237,7 @@
       function sendToDiscord(data) {
         const payload = {
           embeds: [{
-            title: '📋 New Survey Response - Casa Matto EN',
+            title: '📋 New Survey Response - Ellese & Co EN',
             color: 3066993,
             fields: [
               { name: 'Q1. Name', value: data.fullName, inline: true },
@@ -286,7 +286,7 @@
         const improve = form.querySelector('input[name="improve"]:checked').value;
         sendToDiscord({ fullName: firstName + ' ' + lastName, email, ease, decision, improve, stars: rating });
         if (rating >= 4) {
-          window.open('https://www.trustpilot.com/evaluate/casamatto.com', '_blank');
+          window.open('https://www.trustpilot.com/evaluate/elleseandco.com', '_blank');
           showThankYou(rating);
         } else {
           showThankYou(rating);
