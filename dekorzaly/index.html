@@ -6,287 +6,316 @@
   <title>Dekorzaly Ankieta</title>
   <style>
     :root{
-      --bg:#f3f4f6;
+      --bg:#efece6;
       --card:#ffffff;
-      --muted:#666;
-      --text:#111;
-      --border:#ddd;
-      --focus:#111;
-      --danger:#d32f2f;
-      --radius:14px;
+      --muted:#6f6a63;
+      --text:#1a1714;
+      --border:#e4e0d8;
+      --border-strong:#cfc9bd;
+      --accent:#1a1714;
+      --accent-soft:#f2ede4;
+      --gold:#a9822f;
+      --danger:#c0392b;
+      --radius:18px;
+      --serif:'Georgia','Times New Roman',serif;
+      --sans:'Segoe UI',system-ui,-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
     }
-    * { box-sizing: border-box; }
-    body{ margin:0; background:var(--bg); color:var(--text); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; line-height:1.4; }
-    .survey-container {
-      max-width: 720px;
-      margin: 24px auto;
-      padding: 24px;
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    * { box-sizing:border-box; }
+    html,body{ margin:0; }
+    body{
+      background:
+        radial-gradient(1200px 500px at 50% -200px, #f6f3ee 0%, rgba(246,243,238,0) 70%),
+        var(--bg);
+      color:var(--text); font-family:var(--sans); line-height:1.5;
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
     }
-    .survey-container h2 {
-      margin: 0 0 10px 0;
-      font-size: 22px;
-      font-weight: 600;
-      color: var(--text);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .wrap{ max-width:660px; margin:0 auto; padding:30px 20px 96px; }
+
+    /* Brand row */
+    .brand{
+      text-align:center; margin-bottom:20px;
     }
-    .survey-container p {
-      margin: 0 0 26px 0;
-      color: var(--muted);
-      font-size: 15px;
+    .brand .name{
+      font-family:var(--serif); font-size:23px; letter-spacing:0.16em;
+      text-transform:uppercase; font-weight:400; color:var(--text);
     }
-    .question {
-      margin-bottom: 22px;
-      padding: 16px;
-      border: 1px solid rgba(0,0,0,0.06);
-      border-radius: 12px;
-      background: #fff;
-    }
-    .question-label {
-      display: block;
-      margin-bottom: 12px;
-      font-weight: 650;
-      color: var(--text);
-      font-size: 15px;
-    }
-    .text-input {
-      width: 100%;
-      padding: 14px 14px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 16px;
-      background: #fff;
-    }
-    .text-input:focus {
-      outline: none;
-      border-color: var(--focus);
-      box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
-    }
-    .text-input.input-error {
-      border-color: var(--danger);
-    }
-    .name-hint {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 12px;
-      display: block;
-    }
-    .name-row {
-      display: flex;
-      gap: 12px;
-    }
-    .name-row .input-wrap {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .name-row .input-wrap label {
-      font-size: 13px;
-      color: var(--muted);
-    }
-    .email-wrap {
-      margin-top: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .email-wrap label {
-      font-size: 13px;
-      color: var(--muted);
-    }
-    .radio-group {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .radio-label {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      font-size: 15px;
-      color: #222;
-      gap: 10px;
-      padding: 10px 10px;
-      border-radius: 10px;
-      border: 1px solid rgba(0,0,0,0.06);
-      background: #fafafa;
-    }
-    .radio-label:hover { background: #f6f6f6; }
-    .radio-label input[type="radio"] {
-      margin: 0;
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-      accent-color: #111;
-      flex: 0 0 auto;
-    }
-    .stars-group {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .star-btn {
-      padding: 10px 12px;
-      border: 2px solid rgba(0,0,0,0.12);
-      background: #fff;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 20px;
-      transition: transform 0.12s, border-color 0.12s, background 0.12s;
-      min-width: 72px;
-      text-align:center;
-    }
-    .star-btn:hover {
-      border-color: #111;
-      transform: translateY(-1px);
-    }
-    .star-btn.selected {
-      border-color: #111;
-      background: #f3f3f3;
-    }
-    .error-message {
-      color: var(--danger);
-      font-size: 12px;
-      margin-top: 8px;
-      display: none;
+    .brand .rule{
+      width:44px; height:2px; background:var(--gold); margin:12px auto 0; border-radius:2px;
     }
 
-    /* Thank you screen */
-    .thankyou-screen {
-      display: none;
-      text-align: center;
-      padding: 40px 20px;
+    /* Hero */
+    .hero{
+      background:linear-gradient(160deg,#201c18 0%,#2f2a24 100%);
+      color:#fff; border-radius:var(--radius); padding:34px 32px;
+      margin-bottom:16px; box-shadow:0 18px 44px rgba(28,22,16,0.20);
+      position:relative; overflow:hidden;
     }
-    .thankyou-screen .checkmark {
-      font-size: 64px;
-      margin-bottom: 16px;
+    .hero::after{
+      content:""; position:absolute; right:-60px; top:-60px; width:220px; height:220px;
+      background:radial-gradient(circle, rgba(169,130,47,0.28) 0%, rgba(169,130,47,0) 70%);
     }
-    .thankyou-screen h2 {
-      font-size: 24px;
-      margin: 0 0 12px 0;
-      text-transform: none;
-      letter-spacing: 0;
+    .hero .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(255,255,255,0.10); border:1px solid rgba(255,255,255,0.16);
+      padding:7px 14px; border-radius:999px; font-size:11.5px;
+      letter-spacing:0.14em; text-transform:uppercase; font-weight:600; margin-bottom:16px;
+      color:#f0e6d2;
     }
-    .thankyou-screen p {
-      font-size: 16px;
-      color: var(--muted);
-      margin: 0;
+    .hero h1{
+      font-family:var(--serif); font-weight:400; margin:0 0 10px 0;
+      font-size:30px; line-height:1.18; letter-spacing:-0.005em;
     }
+    .hero p{ margin:0; font-size:15px; color:rgba(255,255,255,0.80); max-width:44ch; }
 
-    @media (max-width: 520px){
-      .survey-container{
-        margin: 14px;
-        padding: 18px;
-      }
-      .survey-container h2{
-        font-size: 20px;
-      }
-      .question{
-        padding: 14px;
-      }
-      .star-btn{
-        flex: 1 1 calc(50% - 10px);
-        min-width: 0;
-      }
-      .name-row {
-        flex-direction: column;
-      }
+    /* Steps */
+    .steps{ display:flex; gap:10px; margin-bottom:16px; }
+    .step{
+      flex:1; background:var(--card); border:1px solid var(--border);
+      border-radius:14px; padding:15px 12px; text-align:center;
+    }
+    .step .n{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:28px; height:28px; border-radius:50%; background:var(--accent-soft);
+      color:var(--gold); font-weight:700; font-size:13px; margin-bottom:9px;
+      border:1px solid #eadfca;
+    }
+    .step .t{ font-size:12.5px; color:var(--muted); line-height:1.4; }
+
+    .card{
+      background:var(--card); border-radius:var(--radius);
+      box-shadow:0 10px 30px rgba(26,23,20,0.05); padding:28px 26px;
+      border:1px solid rgba(0,0,0,0.02);
+    }
+    .card-head{ margin-bottom:20px; }
+    .card-head .k{
+      font-size:12px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold);
+    }
+    .card-head .h{ font-family:var(--serif); font-weight:400; font-size:21px; margin:4px 0 0; }
+
+    .question{ margin-bottom:14px; }
+    .question:last-of-type{ margin-bottom:0; }
+    .q-num{ color:var(--gold); font-weight:700; }
+    .question-label{
+      display:block; margin-bottom:12px; font-weight:600; color:var(--text); font-size:15.5px;
+    }
+    .text-input{
+      width:100%; padding:14px 15px; border:1px solid var(--border-strong);
+      border-radius:12px; font-size:16px; background:#fdfcfa; transition:border-color .14s, box-shadow .14s, background .14s;
+      min-height:48px;
+    }
+    .text-input:focus{
+      outline:none; border-color:var(--accent); background:#fff; box-shadow:0 0 0 3px rgba(169,130,47,0.16);
+    }
+    .text-input.input-error{ border-color:var(--danger); }
+    .name-hint{ font-size:13px; color:var(--muted); margin-bottom:12px; display:block; }
+    .name-row{ display:flex; gap:12px; }
+    .name-row .input-wrap{ flex:1; display:flex; flex-direction:column; gap:6px; }
+    .name-row .input-wrap label, .email-wrap label{ font-size:12.5px; color:var(--muted); letter-spacing:0.02em; }
+    .email-wrap{ margin-top:12px; display:flex; flex-direction:column; gap:6px; }
+    .radio-group{ display:flex; flex-direction:column; gap:10px; }
+    .radio-label{
+      display:flex; align-items:center; cursor:pointer; font-size:15px; color:#26221d;
+      gap:12px; padding:13px 15px; border-radius:12px; min-height:48px;
+      border:1px solid var(--border-strong); background:#fdfcfa; transition:border-color .14s, background .14s, box-shadow .14s;
+    }
+    .radio-label:hover{ background:#faf7f1; border-color:var(--gold); }
+    .radio-label:has(input:checked){ border-color:var(--accent); background:#faf6ee; box-shadow:0 0 0 2px rgba(26,23,20,0.05); }
+    .radio-label input[type="radio"]{ margin:0; width:21px; height:21px; cursor:pointer; accent-color:var(--accent); flex:0 0 auto; }
+    .stars-group{ display:flex; gap:10px; flex-wrap:wrap; }
+    .star-btn{
+      padding:14px 12px; border:2px solid var(--border-strong); background:#fdfcfa;
+      border-radius:14px; cursor:pointer; font-size:20px; min-height:52px;
+      transition:transform .12s, border-color .12s, background .12s, box-shadow .12s;
+      min-width:78px; text-align:center;
+    }
+    .star-btn:hover{ border-color:var(--gold); transform:translateY(-2px); }
+    .star-btn.selected{ border-color:var(--accent); background:#faf3e6; box-shadow:0 6px 16px rgba(169,130,47,0.18); }
+    .error-message{ color:var(--danger); font-size:12.5px; margin-top:8px; display:none; }
+    .divider{ height:1px; background:var(--border); margin:18px 0; }
+
+    /* Bottom progress bar (SurveyMonkey: bottom placement lifts completion) */
+    .progress-dock{
+      position:fixed; left:0; right:0; bottom:0; z-index:20;
+      background:rgba(239,236,230,0.86); backdrop-filter:blur(8px);
+      border-top:1px solid var(--border); padding:12px 20px;
+    }
+    .progress-inner{ max-width:660px; margin:0 auto; display:flex; align-items:center; gap:14px; }
+    .progress-track{ flex:1; height:8px; background:#dfd9cf; border-radius:999px; overflow:hidden; }
+    .progress-fill{ height:100%; width:0%; background:linear-gradient(90deg,var(--gold),#c9a24a); border-radius:999px; transition:width .35s ease; }
+    .progress-label{ font-size:12.5px; color:var(--muted); white-space:nowrap; font-weight:600; }
+
+    /* Thank-you */
+    .thankyou-screen{ display:none; }
+    .ty-card{
+      background:var(--card); border-radius:var(--radius);
+      box-shadow:0 10px 30px rgba(26,23,20,0.06); padding:44px 30px; text-align:center;
+      border:1px solid rgba(0,0,0,0.02);
+    }
+    .ty-card .seal{ font-size:56px; margin-bottom:12px; }
+    .ty-card h2{ font-family:var(--serif); font-weight:400; font-size:27px; margin:0 0 10px 0; }
+    .ty-card .lead{ font-size:15.5px; color:var(--muted); margin:0 0 26px 0; }
+    .ty-steps{ text-align:left; max-width:430px; margin:0 auto; display:flex; flex-direction:column; gap:14px; }
+    .ty-step{ display:flex; gap:14px; align-items:flex-start; }
+    .ty-step .n{
+      flex:0 0 auto; width:30px; height:30px; border-radius:50%;
+      background:var(--accent); color:#fff; font-weight:700; font-size:13px;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .ty-step .txt{ font-size:14.5px; color:#3a352f; padding-top:4px; line-height:1.45; }
+    .tp-link{
+      display:inline-block; margin-top:26px; padding:15px 30px; border-radius:999px;
+      background:var(--accent); color:#fff !important; font-weight:600; font-size:15px; text-decoration:none;
+      box-shadow:0 8px 20px rgba(26,23,20,0.18); transition:transform .12s, opacity .12s;
+    }
+    .tp-link:hover{ opacity:.92; transform:translateY(-1px); }
+    .ty-note{ font-size:12.5px; color:var(--muted); margin-top:20px; }
+
+    @media (max-width:520px){
+      .wrap{ padding:20px 13px 92px; }
+      .hero{ padding:26px 20px; }
+      .hero h1{ font-size:25px; }
+      .steps{ flex-direction:column; }
+      .step{ display:flex; align-items:center; gap:12px; text-align:left; padding:13px 15px; }
+      .step .n{ margin-bottom:0; }
+      .card{ padding:22px 17px; }
+      .name-row{ flex-direction:column; }
+      .star-btn{ flex:1 1 calc(50% - 10px); min-width:0; }
     }
   </style>
 </head>
 <body>
-  <div class="survey-container">
-
-    <!-- Survey Form -->
+  <div class="wrap">
     <div id="surveySection">
-      <h2>Krótka ankieta</h2>
-      <p>Odpowiedz na 5 pytań (zajmie to mniej niż 1 minutę).</p>
-      <form id="surveyForm">
-        <!-- Q1 -->
-        <div class="question">
-          <label class="question-label">P1. Jak się nazywasz?</label>
-          <span class="name-hint">Podaj imię, nazwisko i adres e-mail takie same jak przy składaniu zamówienia.</span>
-          <div class="name-row">
-            <div class="input-wrap">
-              <label for="firstName">Imię</label>
-              <input type="text" class="text-input" id="firstName" name="firstName" placeholder="Imię" required>
+
+      <div class="brand">
+        <div class="name">Dekorzaly</div>
+        <div class="rule"></div>
+      </div>
+
+      <div class="hero">
+        <span class="badge">🎁 Nagroda dla klienta</span>
+        <h1>Podziel się opinią i odbierz swój cashback</h1>
+        <p>Wypełnij tę 1-minutową ankietę i zostaw nam opinię, aby zakwalifikować się do zwrotu cashback.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step"><span class="n">1</span><div class="t">Odpowiedz na 5 krótkich pytań</div></div>
+        <div class="step"><span class="n">2</span><div class="t">Zostaw opinię, aby się zakwalifikować</div></div>
+        <div class="step"><span class="n">3</span><div class="t">Weryfikujemy i wysyłamy Twój cashback</div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="k">Krótka ankieta</div>
+          <div class="h">Opowiedz nam o swoim doświadczeniu</div>
+        </div>
+
+        <form id="surveyForm">
+          <div class="question">
+            <label class="question-label"><span class="q-num">P1.</span> Jak się nazywasz?</label>
+            <span class="name-hint">Podaj imię, nazwisko i adres e-mail takie same jak przy składaniu zamówienia.</span>
+            <div class="name-row">
+              <div class="input-wrap">
+                <label for="firstName">Imię</label>
+                <input type="text" class="text-input" id="firstName" name="firstName" placeholder="Imię" required>
+              </div>
+              <div class="input-wrap">
+                <label for="lastName">Nazwisko</label>
+                <input type="text" class="text-input" id="lastName" name="lastName" placeholder="Nazwisko" required>
+              </div>
             </div>
-            <div class="input-wrap">
-              <label for="lastName">Nazwisko</label>
-              <input type="text" class="text-input" id="lastName" name="lastName" placeholder="Nazwisko" required>
+            <div class="error-message" id="nameError">Imię i nazwisko mogą zawierać tylko litery (min. 2 znaki)</div>
+            <div class="email-wrap">
+              <label for="email">Adres e-mail</label>
+              <input type="email" class="text-input" id="email" name="email" placeholder="twoj@email.com" required>
             </div>
+            <div class="error-message" id="emailError">Proszę podać prawidłowy adres e-mail</div>
           </div>
-          <div class="error-message" id="nameError">Imię i nazwisko mogą zawierać tylko litery (min. 2 znaki)</div>
-          <div class="email-wrap">
-            <label for="email">Adres e-mail</label>
-            <input type="email" class="text-input" id="email" name="email" placeholder="twoj@email.com" required>
+
+          <div class="divider"></div>
+
+          <div class="question">
+            <label class="question-label"><span class="q-num">P2.</span> Jak łatwo było złożyć zamówienie?</label>
+            <div class="radio-group">
+              <label class="radio-label"><input type="radio" name="ease" value="Bardzo łatwo" required> Bardzo łatwo</label>
+              <label class="radio-label"><input type="radio" name="ease" value="Łatwo"> Łatwo</label>
+              <label class="radio-label"><input type="radio" name="ease" value="Neutralnie"> Neutralnie</label>
+              <label class="radio-label"><input type="radio" name="ease" value="Trudno"> Trudno</label>
+            </div>
+            <div class="error-message" id="easeError">Proszę wybrać odpowiedź</div>
           </div>
-          <div class="error-message" id="emailError">Proszę podać prawidłowy adres e-mail</div>
-        </div>
-        <!-- Q2 -->
-        <div class="question">
-          <label class="question-label">P2. Jak łatwo było złożyć zamówienie?</label>
-          <div class="radio-group">
-            <label class="radio-label"><input type="radio" name="ease" value="Bardzo łatwo" required> Bardzo łatwo</label>
-            <label class="radio-label"><input type="radio" name="ease" value="Łatwo"> Łatwo</label>
-            <label class="radio-label"><input type="radio" name="ease" value="Neutralnie"> Neutralnie</label>
-            <label class="radio-label"><input type="radio" name="ease" value="Trudno"> Trudno</label>
+
+          <div class="divider"></div>
+
+          <div class="question">
+            <label class="question-label"><span class="q-num">P3.</span> Co skłoniło Cię do zakupu u nas?</label>
+            <div class="radio-group">
+              <label class="radio-label"><input type="radio" name="decision" value="Cena" required> Cena</label>
+              <label class="radio-label"><input type="radio" name="decision" value="Jakość produktu"> Jakość produktu</label>
+              <label class="radio-label"><input type="radio" name="decision" value="Design"> Design</label>
+              <label class="radio-label"><input type="radio" name="decision" value="Opinie"> Opinie</label>
+              <label class="radio-label"><input type="radio" name="decision" value="Media społecznościowe"> Media społecznościowe</label>
+              <label class="radio-label"><input type="radio" name="decision" value="Inne"> Inne</label>
+            </div>
+            <div class="error-message" id="decisionError">Proszę wybrać odpowiedź</div>
           </div>
-          <div class="error-message" id="easeError">Proszę wybrać odpowiedź</div>
-        </div>
-        <!-- Q3 -->
-        <div class="question">
-          <label class="question-label">P3. Co skłoniło Cię do zakupu u nas?</label>
-          <div class="radio-group">
-            <label class="radio-label"><input type="radio" name="decision" value="Cena" required> Cena</label>
-            <label class="radio-label"><input type="radio" name="decision" value="Jakość produktu"> Jakość produktu</label>
-            <label class="radio-label"><input type="radio" name="decision" value="Design"> Design</label>
-            <label class="radio-label"><input type="radio" name="decision" value="Opinie"> Opinie</label>
-            <label class="radio-label"><input type="radio" name="decision" value="Media społecznościowe"> Media społecznościowe</label>
-            <label class="radio-label"><input type="radio" name="decision" value="Inne"> Inne</label>
+
+          <div class="divider"></div>
+
+          <div class="question">
+            <label class="question-label"><span class="q-num">P4.</span> Co moglibyśmy poprawić?</label>
+            <div class="radio-group">
+              <label class="radio-label"><input type="radio" name="improve" value="Wygląd strony" required> Wygląd strony</label>
+              <label class="radio-label"><input type="radio" name="improve" value="Informacje o produktach"> Informacje o produktach</label>
+              <label class="radio-label"><input type="radio" name="improve" value="Proces zakupu"> Proces zakupu</label>
+              <label class="radio-label"><input type="radio" name="improve" value="Komunikacja / e-maile"> Komunikacja / e-maile</label>
+              <label class="radio-label"><input type="radio" name="improve" value="Nic — wszystko było świetne"> Nic — wszystko było świetne</label>
+            </div>
+            <div class="error-message" id="improveError">Proszę wybrać odpowiedź</div>
           </div>
-          <div class="error-message" id="decisionError">Proszę wybrać odpowiedź</div>
-        </div>
-        <!-- Q4 -->
-        <div class="question">
-          <label class="question-label">P4. Co moglibyśmy poprawić?</label>
-          <div class="radio-group">
-            <label class="radio-label"><input type="radio" name="improve" value="Wygląd strony" required> Wygląd strony</label>
-            <label class="radio-label"><input type="radio" name="improve" value="Informacje o produktach"> Informacje o produktach</label>
-            <label class="radio-label"><input type="radio" name="improve" value="Proces zakupu"> Proces zakupu</label>
-            <label class="radio-label"><input type="radio" name="improve" value="Komunikacja / e-maile"> Komunikacja / e-maile</label>
-            <label class="radio-label"><input type="radio" name="improve" value="Nic — wszystko było świetne"> Nic — wszystko było świetne</label>
+
+          <div class="divider"></div>
+
+          <div class="question">
+            <label class="question-label"><span class="q-num">P5.</span> Ile gwiazdek dajesz za to doświadczenie?</label>
+            <div class="stars-group" id="starsGroup">
+              <button type="button" class="star-btn" data-stars="5" aria-label="5 gwiazdek">⭐⭐⭐⭐⭐</button>
+              <button type="button" class="star-btn" data-stars="4" aria-label="4 gwiazdki">⭐⭐⭐⭐</button>
+              <button type="button" class="star-btn" data-stars="3" aria-label="3 gwiazdki">⭐⭐⭐</button>
+              <button type="button" class="star-btn" data-stars="2" aria-label="2 gwiazdki">⭐⭐</button>
+              <button type="button" class="star-btn" data-stars="1" aria-label="1 gwiazdka">⭐</button>
+            </div>
+            <input type="hidden" name="stars" id="starsInput">
+            <div class="error-message" id="starsError">Proszę wybrać ocenę</div>
           </div>
-          <div class="error-message" id="improveError">Proszę wybrać odpowiedź</div>
-        </div>
-        <!-- Q5 -->
-        <div class="question">
-          <label class="question-label">P5. Ile gwiazdek dajesz za to doświadczenie?</label>
-          <div class="stars-group" id="starsGroup">
-            <button type="button" class="star-btn" data-stars="5" aria-label="5 gwiazdek">⭐⭐⭐⭐⭐</button>
-            <button type="button" class="star-btn" data-stars="4" aria-label="4 gwiazdki">⭐⭐⭐⭐</button>
-            <button type="button" class="star-btn" data-stars="3" aria-label="3 gwiazdki">⭐⭐⭐</button>
-            <button type="button" class="star-btn" data-stars="2" aria-label="2 gwiazdki">⭐⭐</button>
-            <button type="button" class="star-btn" data-stars="1" aria-label="1 gwiazdka">⭐</button>
-          </div>
-          <input type="hidden" name="stars" id="starsInput">
-          <div class="error-message" id="starsError">Proszę wybrać ocenę</div>
-        </div>
-        <!-- NO SUBMIT BUTTON -->
-      </form>
+        </form>
+      </div>
     </div>
 
-    <!-- Thank You Screen (for 1-3 stars) -->
     <div class="thankyou-screen" id="thankyouSection">
-      <div class="checkmark">✅</div>
-      <h2 id="thankTitle">Dziękujemy!</h2>
-      <p id="thankText">Aby otrzymać cashback, zostaw opinię w otwartej karcie Trustpilot🙏</p>
-    </div>
+      <div class="ty-card">
+        <div class="seal">✅</div>
+        <h2 id="thankTitle">Dziękujemy!</h2>
+        <p class="lead" id="thankText">Oto jak odebrać swój cashback:</p>
 
+        <div class="ty-steps" id="claimSteps">
+          <div class="ty-step"><span class="n">1</span><div class="txt">Zostaw opinię w otwartej karcie Trustpilot.</div></div>
+          <div class="ty-step"><span class="n">2</span><div class="txt">Weryfikujemy Twoją opinię na podstawie zamówienia (24–48 godzin).</div></div>
+          <div class="ty-step"><span class="n">3</span><div class="txt">Twój cashback zostanie wysłany po weryfikacji. 🎉</div></div>
+        </div>
+
+        <a class="tp-link" id="tpLink" href="https://www.trustpilot.com/evaluate/dekorzaly.com" target="_blank" rel="noopener">Otwórz stronę opinii Trustpilot</a>
+        <div class="ty-note">Nie widzisz otwartej karty z opinią? Skorzystaj z przycisku powyżej. Użyj tego samego imienia, które podałeś tutaj.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom progress dock (hidden on thank-you) -->
+  <div class="progress-dock" id="progressDock">
+    <div class="progress-inner">
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-label" id="progressLabel">0 z 5</div>
+    </div>
   </div>
 
   <script>
@@ -294,14 +323,35 @@
       const form = document.getElementById('surveyForm');
       const starsGroup = document.getElementById('starsGroup');
       const starsInput = document.getElementById('starsInput');
-
+      const progressFill = document.getElementById('progressFill');
+      const progressLabel = document.getElementById('progressLabel');
       const webhookUrl = 'https://discordapp.com/api/webhooks/1480188673906442331/pmIkwDV-PdmDeba-SGDqoXp9SwgJX96dHoQLhcFD3el1cfrWqkRXEYYwdCYXQhi2mJqL';
+
+      const nameRegex = /^[\p{L}\s\-]{2,}$/u;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      function q1Done(){
+        const f = form.querySelector('input[name="firstName"]').value.trim();
+        const l = form.querySelector('input[name="lastName"]').value.trim();
+        const e = form.querySelector('input[name="email"]').value.trim();
+        return nameRegex.test(f) && nameRegex.test(l) && emailRegex.test(e);
+      }
+
+      function updateProgress(){
+        let done = 0;
+        if (q1Done()) done++;
+        if (form.querySelector('input[name="ease"]:checked')) done++;
+        if (form.querySelector('input[name="decision"]:checked')) done++;
+        if (form.querySelector('input[name="improve"]:checked')) done++;
+        if (starsInput.value) done++;
+        progressFill.style.width = (done/5*100) + '%';
+        progressLabel.textContent = done + ' z 5';
+      }
+      form.addEventListener('input', updateProgress);
+      form.addEventListener('change', updateProgress);
 
       function validate() {
         let isValid = true;
-        const nameRegex = /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s\-]{2,}$/;
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
         const firstName = form.querySelector('input[name="firstName"]').value.trim();
         const lastName = form.querySelector('input[name="lastName"]').value.trim();
         const email = form.querySelector('input[name="email"]').value.trim();
@@ -319,7 +369,6 @@
           form.querySelector('input[name="firstName"]').classList.remove('input-error');
           form.querySelector('input[name="lastName"]').classList.remove('input-error');
         }
-
         if (!email || !emailRegex.test(email)) {
           document.getElementById('emailError').style.display = 'block';
           form.querySelector('input[name="email"]').classList.add('input-error');
@@ -328,16 +377,12 @@
           document.getElementById('emailError').style.display = 'none';
           form.querySelector('input[name="email"]').classList.remove('input-error');
         }
-
         if (!ease) { document.getElementById('easeError').style.display = 'block'; isValid = false; }
         else { document.getElementById('easeError').style.display = 'none'; }
-
         if (!decision) { document.getElementById('decisionError').style.display = 'block'; isValid = false; }
         else { document.getElementById('decisionError').style.display = 'none'; }
-
         if (!improve) { document.getElementById('improveError').style.display = 'block'; isValid = false; }
         else { document.getElementById('improveError').style.display = 'none'; }
-
         return isValid;
       }
 
@@ -365,45 +410,46 @@
         }
       }
 
-      function showThankYou(rating){
-if(rating>=4){document.getElementById('thankTitle').textContent='Dziękujemy!';document.getElementById('thankText').textContent='Aby otrzymać cashback, zostaw opinię w otwartej karcie Trustpilot🙏';}
-else{document.getElementById('thankTitle').textContent='Dziękujemy!';document.getElementById('thankText').textContent='Dziękujemy za Twoją opinię. Doceniamy poświęcony czas.';}
-document.getElementById('surveySection').style.display='none';
-document.getElementById('thankyouSection').style.display='block';
-}
+      function showThankYou(rating) {
+        if (rating >= 4) {
+          document.getElementById('thankTitle').textContent = 'Już prawie — odbierz swój cashback';
+          document.getElementById('thankText').textContent = 'Dziękujemy! Oto jak otrzymać swój cashback:';
+          document.getElementById('claimSteps').style.display = 'flex';
+          document.getElementById('tpLink').style.display = 'inline-block';
+          document.querySelector('.ty-note').style.display = 'block';
+        } else {
+          document.getElementById('thankTitle').textContent = 'Dziękujemy za Twoją opinię';
+          document.getElementById('thankText').textContent = 'Doceniamy czas poświęcony na pomoc w ulepszaniu naszych usług. Nasz zespół zapozna się z Twoją odpowiedzią.';
+          document.getElementById('claimSteps').style.display = 'none';
+          document.getElementById('tpLink').style.display = 'none';
+          document.querySelector('.ty-note').style.display = 'none';
+        }
+        document.getElementById('surveySection').style.display = 'none';
+        document.getElementById('thankyouSection').style.display = 'block';
+        document.getElementById('progressDock').style.display = 'none';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
 
       starsGroup.addEventListener('click', function(e) {
         const btn = e.target.closest('.star-btn');
         if (!btn) return;
-
-        // Validate first
-        if (!validate()) {
-          document.getElementById('starsError').style.display = 'none';
-          return;
-        }
-
-        // Mark selected
+        if (!validate()) { document.getElementById('starsError').style.display = 'none'; return; }
         starsGroup.querySelectorAll('.star-btn').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
         const rating = parseInt(btn.dataset.stars, 10);
         starsInput.value = rating;
-
-        // Collect data
+        updateProgress();
         const firstName = form.querySelector('input[name="firstName"]').value.trim();
         const lastName = form.querySelector('input[name="lastName"]').value.trim();
         const email = form.querySelector('input[name="email"]').value.trim();
         const ease = form.querySelector('input[name="ease"]:checked').value;
         const decision = form.querySelector('input[name="decision"]:checked').value;
         const improve = form.querySelector('input[name="improve"]:checked').value;
-
         sendToDiscord({ fullName: firstName + ' ' + lastName, email, ease, decision, improve, stars: rating });
-
         if (rating >= 4) {
-          // 4 or 5 stars → Trustpilot
           window.open('https://www.trustpilot.com/evaluate/dekorzaly.com', '_blank');
           showThankYou(rating);
         } else {
-          // 1, 2 or 3 stars → Thank you screen
           showThankYou(rating);
         }
       });
