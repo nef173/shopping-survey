@@ -402,12 +402,7 @@
             timestamp: new Date().toISOString()
           }]
         };
-        const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
-        if (navigator.sendBeacon) {
-          navigator.sendBeacon(webhookUrl, blob);
-        } else {
-          fetch(webhookUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-        }
+        fetch(webhookUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), keepalive: true }).catch(function(){});
       }
 
       function showThankYou(rating) {
