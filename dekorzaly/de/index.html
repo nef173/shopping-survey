@@ -407,14 +407,14 @@
 
       function showThankYou(rating) {
         if (rating >= 4) {
-          document.getElementById('thankTitle').textContent = 'Almost there — claim your cashback';
-          document.getElementById('thankText').textContent = "Vielen Dank! Here's how to receive your cashback:";
+          document.getElementById('thankTitle').textContent = 'Fast geschafft — sichern Sie sich Ihr Cashback';
+          document.getElementById('thankText').textContent = 'Vielen Dank! So erhalten Sie Ihr Cashback:';
           document.getElementById('claimSteps').style.display = 'flex';
           document.getElementById('tpLink').style.display = 'inline-block';
           document.querySelector('.ty-note').style.display = 'block';
         } else {
-          document.getElementById('thankTitle').textContent = 'Thank you for your feedback';
-          document.getElementById('thankText').textContent = 'We appreciate you taking the time to help us improve. Our team will review your response.';
+          document.getElementById('thankTitle').textContent = 'Vielen Dank für Ihr Feedback';
+          document.getElementById('thankText').textContent = 'Wir schätzen es, dass Sie sich die Zeit genommen haben, uns zu verbessern. Unser Team wird Ihre Antwort prüfen.';
           document.getElementById('claimSteps').style.display = 'none';
           document.getElementById('tpLink').style.display = 'none';
           document.querySelector('.ty-note').style.display = 'none';
