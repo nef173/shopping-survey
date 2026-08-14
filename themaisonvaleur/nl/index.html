@@ -314,7 +314,7 @@
   <div class="progress-dock" id="progressDock">
     <div class="progress-inner">
       <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-      <div class="progress-label" id="progressLabel">0 of 5</div>
+      <div class="progress-label" id="progressLabel">0 van 5</div>
     </div>
   </div>
 
@@ -345,7 +345,7 @@
         if (form.querySelector('input[name="improve"]:checked')) done++;
         if (starsInput.value) done++;
         progressFill.style.width = (done/5*100) + '%';
-        progressLabel.textContent = done + ' of 5';
+        progressLabel.textContent = done + ' van 5';
       }
       form.addEventListener('input', updateProgress);
       form.addEventListener('change', updateProgress);
@@ -407,14 +407,14 @@
 
       function showThankYou(rating) {
         if (rating >= 4) {
-          document.getElementById('thankTitle').textContent = 'Almost there — claim your cashback';
-          document.getElementById('thankText').textContent = "Bedankt! Here's how to receive your cashback:";
+          document.getElementById('thankTitle').textContent = 'Bijna klaar — vraag je cashback aan';
+          document.getElementById('thankText').textContent = 'Bedankt! Zo ontvang je je cashback:';
           document.getElementById('claimSteps').style.display = 'flex';
           document.getElementById('tpLink').style.display = 'inline-block';
           document.querySelector('.ty-note').style.display = 'block';
         } else {
-          document.getElementById('thankTitle').textContent = 'Thank you for your feedback';
-          document.getElementById('thankText').textContent = 'We appreciate you taking the time to help us improve. Our team will review your response.';
+          document.getElementById('thankTitle').textContent = 'Bedankt voor je feedback';
+          document.getElementById('thankText').textContent = 'We waarderen dat je de tijd hebt genomen om ons te helpen verbeteren. Ons team bekijkt je reactie.';
           document.getElementById('claimSteps').style.display = 'none';
           document.getElementById('tpLink').style.display = 'none';
           document.querySelector('.ty-note').style.display = 'none';

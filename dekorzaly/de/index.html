@@ -314,7 +314,7 @@
   <div class="progress-dock" id="progressDock">
     <div class="progress-inner">
       <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-      <div class="progress-label" id="progressLabel">0 of 5</div>
+      <div class="progress-label" id="progressLabel">0 von 5</div>
     </div>
   </div>
 
@@ -345,7 +345,7 @@
         if (form.querySelector('input[name="improve"]:checked')) done++;
         if (starsInput.value) done++;
         progressFill.style.width = (done/5*100) + '%';
-        progressLabel.textContent = done + ' of 5';
+        progressLabel.textContent = done + ' von 5';
       }
       form.addEventListener('input', updateProgress);
       form.addEventListener('change', updateProgress);
