@@ -327,6 +327,16 @@
       const progressLabel = document.getElementById('progressLabel');
       const webhookUrl = 'https://dashboard.nnholdings.co/store/api/survey/submit/dekorzaly';
 
+      // Trustpilot star threshold — read live from the dashboard so it can be
+      // toggled (4★+ vs 3★+) in Store Settings without editing this page.
+      // Defaults to 4, and stays 4 if the dashboard is ever unreachable, so the
+      // survey never breaks.
+      let TP_THRESHOLD = 4;
+      fetch('https://dashboard.nnholdings.co/store/api/survey/config/dekorzaly')
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (d && (d.tpThreshold === 3 || d.tpThreshold === 4)) TP_THRESHOLD = d.tpThreshold; })
+        .catch(function () {});
+
       const nameRegex = /^[\p{L}\s\-]{2,}$/u;
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -406,7 +416,7 @@
       }
 
       function showThankYou(rating) {
-        if (rating >= 4) {
+        if (rating >= TP_THRESHOLD) {
           document.getElementById('thankTitle').textContent = 'Fast geschafft — sichern Sie sich Ihr Cashback';
           document.getElementById('thankText').textContent = 'Vielen Dank! So erhalten Sie Ihr Cashback:';
           document.getElementById('claimSteps').style.display = 'flex';
@@ -441,7 +451,7 @@
         const decision = form.querySelector('input[name="decision"]:checked').value;
         const improve = form.querySelector('input[name="improve"]:checked').value;
         sendToDiscord({ fullName: firstName + ' ' + lastName, email, ease, decision, improve, stars: rating });
-        if (rating >= 4) {
+        if (rating >= TP_THRESHOLD) {
           window.open('https://www.trustpilot.com/evaluate/dekorzaly.com', '_blank');
           showThankYou(rating);
         } else {
