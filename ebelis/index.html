@@ -325,14 +325,14 @@
       const starsInput = document.getElementById('starsInput');
       const progressFill = document.getElementById('progressFill');
       const progressLabel = document.getElementById('progressLabel');
-      const webhookUrl = 'https://dashboard.nnholdings.co/store/api/survey/submit/ebelis';
+      const webhookUrl = 'https://dashboard.nnholdings.co/store/api/survey/submit/9fvcc52s';
 
       // Trustpilot star threshold — read live from the dashboard so it can be
       // toggled (4★+ vs 3★+) in Store Settings without editing this page.
       // Defaults to 4, and stays 4 if the dashboard is ever unreachable, so the
       // survey never breaks.
       let TP_THRESHOLD = 4;
-      fetch('https://dashboard.nnholdings.co/store/api/survey/config/ebelis')
+      fetch('https://dashboard.nnholdings.co/store/api/survey/config/9fvcc52s')
         .then(function (r) { return r.json(); })
         .then(function (d) { if (d && (d.tpThreshold === 3 || d.tpThreshold === 4)) TP_THRESHOLD = d.tpThreshold; })
         .catch(function () {});
