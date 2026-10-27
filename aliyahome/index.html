@@ -305,7 +305,7 @@
           <div class="ty-step"><span class="n">3</span><div class="txt">Your cashback is sent to you once verified. 🎉</div></div>
         </div>
 
-        <a class="tp-link" id="tpLink" href="https://www.trustpilot.com/evaluate/elleseandco.com" target="_blank" rel="noopener">Open Trustpilot review page</a>
+        <a class="tp-link" id="tpLink" href="https://www.trustpilot.com/evaluate/aliyahome.com" target="_blank" rel="noopener">Open Trustpilot review page</a>
         <div class="ty-note">Didn't see the review tab open? Use the button above. Please use the same name you entered here.</div>
       </div>
     </div>
@@ -453,7 +453,7 @@
         const improve = form.querySelector('input[name="improve"]:checked').value;
         sendToDiscord({ fullName: firstName + ' ' + lastName, email, ease, decision, improve, stars: rating });
         if (rating >= TP_THRESHOLD) {
-          window.open('https://www.trustpilot.com/evaluate/elleseandco.com', '_blank');
+          window.open('https://www.trustpilot.com/evaluate/aliyahome.com', '_blank');
           showThankYou(rating);
         } else {
           showThankYou(rating);
